@@ -13,17 +13,45 @@
             padding: 0;
             box-sizing: border-box;
         }
+         #backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #2563eb; /* Azul principal */
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+    z-index: 9999; /* Garantir que fica acima de tudo */
+  }
+
+  #backToTop:hover {
+    background: #1d4ed8; /* Azul mais escuro */
+    transform: translateY(-3px);
+  }
+
+  #backToTop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #ffffff;
-            background: #0a0a0a;
+            background: radial-gradient(circle at 65% 35%, rgba(0, 123, 255, 0.9) 0%, rgba(0, 150, 255, 0.8) 15%, rgba(0, 100, 200, 0.6) 25%, rgba(0, 69, 150, 0.3) 35%, transparent 50%), linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.7) 70%, rgba(10, 10, 10, 0.9) 100%), radial-gradient(ellipse at bottom, rgba(20, 20, 20, 0.8) 0%, rgba(15, 15, 15, 0.9) 50%, rgba(10, 10, 10, 1) 100%);
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Spline Background - apenas no hero */
         .spline-background {
             position: absolute;
             top: 0;
@@ -47,27 +75,21 @@
             50% { transform: translateY(-10px) scale(1.02); }
         }
 
-        /* Background overlay para legibilidade do hero */
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, 
-                rgba(10, 10, 10, 0.3) 0%, 
-                rgba(10, 10, 10, 0.4) 50%, 
-                rgba(10, 10, 10, 0.3) 100%);
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.4) 50%, rgba(10, 10, 10, 0.3) 100%);
             z-index: 1;
         }
 
-        /* Content overlay geral */
         .content-overlay {
             position: relative;
             z-index: 1;
         }
 
-        /* Header */
         .header {
             padding: 1rem 0;
             position: fixed;
@@ -113,18 +135,17 @@
         }
 
         .nav-links a.cta-nav {
-            background: linear-gradient(135deg, #4ecdc4);
+            background: linear-gradient(135deg, #00c4ff);
             color: #ffffff;
             font-weight: 600;
         }
 
         .nav-links a.cta-nav:hover {
-            background: linear-gradient(135deg, #26c6da);
+            background: linear-gradient(135deg, #00aaff);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 150, 255, 0.3);
         }
 
-        /* Mobile menu */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -154,7 +175,6 @@
             overflow: hidden;
         }
 
-        /* Background com sol laranja */
         .hero::before {
             content: '';
             position: absolute;
@@ -162,25 +182,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 65% 35%, 
-                    rgba(255, 140, 0, 0.9) 0%,
-                    rgba(255, 165, 0, 0.8) 15%,
-                    rgba(255, 100, 0, 0.6) 25%,
-                    rgba(255, 69, 0, 0.3) 35%,
-                    transparent 50%),
-                linear-gradient(180deg,
-                    rgba(10, 10, 10, 0.3) 0%,
-                    rgba(10, 10, 10, 0.7) 70%,
-                    rgba(10, 10, 10, 0.9) 100%),
-                radial-gradient(ellipse at bottom,
-                    rgba(20, 20, 20, 0.8) 0%,
-                    rgba(15, 15, 15, 0.9) 50%,
-                    rgba(10, 10, 10, 1) 100%);
             z-index: 0;
         }
 
-        /* Efeito de montanha/silhueta */
         .hero::after {
             content: '';
             position: absolute;
@@ -188,14 +192,12 @@
             left: 0;
             width: 100%;
             height: 40%;
-            background: 
-                polygon(0% 100%, 0% 80%, 15% 75%, 25% 85%, 35% 70%, 45% 80%, 55% 65%, 65% 75%, 75% 60%, 85% 70%, 100% 55%, 100% 100%);
-            background-color: rgba(5, 5, 5, 0.9);
+            background: polygon(0% 100%, 0% 80%, 15% 75%, 25% 85%, 35% 70%, 45% 80%, 55% 65%, 65% 75%, 75% 60%, 85% 70%, 100% 55%, 100% 100%);
+            background-color: rgba(0, 0, 255, 0.9); /* Blue sun style */
             clip-path: polygon(0% 100%, 0% 80%, 15% 75%, 25% 85%, 35% 70%, 45% 80%, 55% 65%, 65% 75%, 75% 60%, 85% 70%, 100% 55%, 100% 100%);
             z-index: 1;
         }
 
-        /* Fade effects para todo o site */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -207,7 +209,6 @@
             transform: translateY(0);
         }
 
-        /* Hero fade effects específicos */
         .hero-fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -231,17 +232,10 @@
         }
 
         @keyframes heroFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Conteúdo do hero acima do background */
         .hero .container {
             position: relative;
             z-index: 2;
@@ -250,7 +244,7 @@
         .logo {
             font-size: 2.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, orangered, #ff6b6b);
+            background: linear-gradient(135deg, #00c4ff, #00aaff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -282,7 +276,6 @@
             line-height: 1.7;
         }
 
-        /* Book Preview com hover suave */
         .book-preview {
             margin: 3rem 0;
             position: relative;
@@ -305,12 +298,10 @@
         .book-cover {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #4ecdc4 50%, #00d4ff 100%);
+            background: linear-gradient(135deg, #00c4ff 50%, #00aaff 100%);
             border-radius: 12px;
             position: relative;
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -333,7 +324,6 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        /* CTA Button */
         .cta-button {
             display: inline-block;
             padding: 18px 36px;
@@ -341,9 +331,9 @@
             font-weight: 600;
             text-decoration: none;
             color: #fff;
-            background: linear-gradient(135deg, #4ecdc4);
+            background: linear-gradient(135deg, #00c4ff);
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 150, 255, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -351,10 +341,9 @@
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 12px 35px rgba(0, 150, 255, 0.4);
         }
 
-        /* Price Section */
         .price-section {
             margin: 4rem 0;
             text-align: center;
@@ -374,13 +363,14 @@
         .current-price {
             font-size: 3rem;
             font-weight: 800;
-            color: #00d4ff;
+            color: #00aaff;
             margin-bottom: 1rem;
         }
 
         .price-benefits {
             list-style: none;
             margin: 2rem 0;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .price-benefits li {
@@ -395,12 +385,11 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: #4ecdc4;
+            color: #00c4ff;
             font-weight: bold;
             font-size: 1.2rem;
         }
 
-        /* Features Section */
         .features {
             padding: 80px 0;
             position: relative;
@@ -463,7 +452,6 @@
             line-height: 1.6;
         }
 
-        /* Guarantee Section */
         .guarantee {
             padding: 80px 0;
             text-align: center;
@@ -483,7 +471,6 @@
             color: #10b981;
         }
 
-        /* FAQ Section */
         .faq {
             padding: 80px 0;
         }
@@ -517,7 +504,7 @@
             right: 1.5rem;
             font-size: 1.5rem;
             transition: transform 0.3s ease;
-            color: #00d4ff;
+            color: #00aaff;
         }
 
         .faq-item.active .faq-question::after {
@@ -537,13 +524,11 @@
             padding: 1.5rem;
         }
 
-        /* Final CTA */
         .final-cta {
             padding: 80px 0;
             text-align: center;
         }
 
-        /* Footer */
         .footer {
             padding: 40px 0;
             text-align: center;
@@ -552,7 +537,6 @@
             background: rgba(10, 10, 10, 0.8);
         }
 
-        /* Loading animation */
         .loader {
             position: fixed;
             top: 0;
@@ -576,17 +560,67 @@
             width: 50px;
             height: 50px;
             border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #00d4ff;
+            border-top: 3px solid #00aaff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
+        
+    .sumario {
+    background: rgba(255, 255, 255, 0.95); /* fundo translúcido */
+    backdrop-filter: blur(6px); /* efeito vidro */
+    border-radius: 12px;
+    padding: 25px 30px;
+    max-width: 700px;
+    margin: 40px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+  }
 
+  .sumario h2 {
+    color: #1d4ed8; /* azul elegante */
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 8px;
+  }
+
+  .sumario a {
+    display: block;
+    color: #1e3a8a; /* azul escuro */
+    text-decoration: none;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .sumario a:hover {
+    color: #2563eb; /* azul mais forte */
+    transform: translateX(5px); /* leve animação */
+  }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* Mobile Responsive */
+        .chapter-section {
+            padding: 80px 40px; /* Book-like summary padding */
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 60px; /* Space between chapters */
+        }
+
+        .chapter-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 justify-content: space-between;
@@ -639,7 +673,7 @@
                 font-size: 1rem;
                 margin-bottom: 2rem;
             }
-            
+
             .book-3d {
                 width: 220px;
                 height: 280px;
@@ -670,7 +704,7 @@
             .section-subtitle {
                 font-size: 1rem;
             }
-            
+
             .features-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -692,8 +726,13 @@
             .features,
             .guarantee,
             .faq,
-            .final-cta {
+            .final-cta,
+            .chapter-section {
                 padding: 60px 0;
+            }
+
+            .chapter-section {
+                padding: 60px 20px; /* Adjusted padding for mobile */
             }
         }
 
@@ -725,7 +764,6 @@
             }
         }
 
-        /* Performance optimizations */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -736,16 +774,13 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-spinner"></div>
     </div>
     <div class="spline-background">
-        <spline-viewer src="https://prod.spline.design/your-spline-file-url/scene.splinecode" 
-            style="background: transparent;"></spline-viewer>
+        <spline-viewer src="https://prod.spline.design/your-spline-file-url/scene.splinecode" style="background: transparent;"></spline-viewer>
     </div>
     <div class="content-overlay">
-        <!-- Header -->
         <header class="header">
             <div class="header-content">
                 <nav>
@@ -760,7 +795,6 @@
             </div>
         </header>
 
-        /* Hero Section com novo background */
         <section class="hero" id="home">
             <div class="container">
                 <div class="logo hero-fade-in">O Canivete Suíço Digital</div>
@@ -770,8 +804,166 @@
                     Crie posts, e-mails e ideias de produtos em minutos, mesmo com bloqueio criativo. 
                     Potencialize seu negócio com prompts testados e aprovados por especialistas.
                 </p>
+                <div class="book-preview">
+                    <div class="book-3d">
+                        <div class="book-cover">
+                            <div class="book-title">O Canivete Suíço Digital</div>
+                            <div class="book-subtitle">30 Prompts de ChatGPT</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#comprar" class="cta-button hero-fade-in hero-fade-delay-4">QUERO MEU CANIVETE SUÍÇO DIGITAL!</a>
+            </div>
+        </section>
+        
+      
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title fade-in">O Que Você Vai Descobrir</h2>
+                <p class="section-subtitle fade-in">
+                    Cada capítulo é uma nova ferramenta para revolucionar seu negócio
+                </p>
+                <div class="sumario">
+                <h2>Sumário</h2>
+                <a href="#introducao">Introdução: Como Usar este Canivete Suíço (E Falar a Língua da IA)</a>
+                <a href="#capitulo1">Capítulo 1: Marketing de Conteúdo que Trabalha Sozinho</a>
+                <a href="#capitulo2">Capítulo 2: Copywriting que Vende (Até Areia no Deserto)</a>
+                <a href="#capitulo3">Capítulo 3: Ideação e Estratégia de Negócio (O CEO Artificial)</a>
+                <a href="#capitulo4">Capítulo 4: Relacionamento e Atendimento ao Cliente (A Criação de Fãs)</a>
+                <a href="#conclusao">Conclusão: Seu Negócio, Potencializado</a>
+            </div>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <h3 class="feature-title">Marketing de Conteúdo Automatizado</h3>
+                        <p class="feature-description">
+                            10 prompts para nunca mais ficar sem ideia para suas redes sociais. 
+                            Crie calendários editoriais, roteiros de vídeos e legendas cativantes em minutos.
+                        </p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <h3 class="feature-title">Copywriting que Vende</h3>
+                        <p class="feature-description">
+                            5 prompts para escrever anúncios, e-mails e páginas de venda que convertem. 
+                            Transforme visitantes em clientes com textos persuasivos.
+                        </p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <h3 class="feature-title">Estratégia de Negócio</h3>
+                        <p class="feature-description">
+                            4 prompts para gerar ideias de produtos, analisar concorrentes e definir personas. 
+                            Pense como um CEO com IA ao seu lado.
+                        </p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <h3 class="feature-title">Relacionamento com Clientes</h3>
+                        <p class="feature-description">
+                            11 prompts para criar fãs da sua marca. Desde o atendimento perfeito 
+                            até programas de fidelidade que funcionam.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <!-- Price Section -->
+        <section class="chapter-section" id="capitulo1">
+            <h2>Capítulo 1: Marketing de Conteúdo que Trabalha Sozinho</h2>
+            <p>
+                Aprenda a automatizar a criação de conteúdo relevante para suas redes sociais com 10 prompts. Crie calendários editoriais, roteiros de vídeos e muito mais em minutos, eliminando o pânico de "o que postar hoje?".
+            </p>
+        </section>
+
+        <section class="chapter-section" id="capitulo2">
+            <h2>Capítulo 2: Copywriting que Vende (Até Areia no Deserto)</h2>
+            <p>
+                Domine 5 prompts para criar textos persuasivos que convertem, como anúncios e e-mails. Transforme visitantes em clientes com estratégias de copywriting poderosas.
+            </p>
+        </section>
+
+        <section class="chapter-section" id="capitulo3">
+            <h2>Capítulo 3: Ideação e Estratégia de Negócio (O CEO Artificial)</h2>
+            <p>
+                Utilize 4 prompts para gerar ideias de produtos, analisar concorrentes e definir personas. Pense estrategicamente como um CEO com o apoio da IA.
+            </p>
+        </section>
+
+        <section class="chapter-section" id="capitulo4">
+            <h2>Capítulo 4: Relacionamento e Atendimento ao Cliente (A Criação de Fãs)</h2>
+            <p>
+                Explore 11 prompts para construir uma base de fãs leais. Melhore o atendimento ao cliente e crie programas de fidelidade eficazes.
+            </p>
+        </section>
+
+        <section class="guarantee">
+            <div class="container">
+                <div class="guarantee-content fade-in">
+                    <div class="guarantee-icon">✓</div>
+                    <h2 class="section-title">Garantia de Satisfação</h2>
+                    <p class="section-subtitle">
+                        Oferecemos garantia incondicional de 7 dias. Se você não ficar satisfeito com o eBook, 
+                        devolvemos seu dinheiro sem perguntas. Mais de 500 leitores já transformaram seus negócios!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section-title fade-in">Perguntas Frequentes</h2>
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        O e-book funciona para qualquer tipo de negócio?
+                    </div>
+                    <div class="faq-answer">
+                        Sim! Os prompts foram criados para serem adaptáveis a qualquer nicho. 
+                        Seja você um consultor, lojista, prestador de serviços ou infoprodutor, 
+                        você encontrará estratégias aplicáveis ao seu negócio.
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Preciso ter experiência com IA para usar?
+                    </div>
+                    <div class="faq-answer">
+                        Não! O e-book ensina exatamente como "falar" com o ChatGPT para obter 
+                        os melhores resultados. Incluímos instruções claras e exemplos práticos 
+                        para iniciantes.
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Como recebo o e-book após a compra?
+                    </div>
+                    <div class="faq-answer">
+                        Após a confirmação do pagamento, você recebe instantaneamente um e-mail 
+                        com o link para download do e-book em PDF. É rápido e automático!
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Há garantia de reembolso?
+                    </div>
+                    <div class="faq-answer">
+                        Sim! Oferecemos garantia incondicional de 7 dias. Se você não ficar 
+                        100% satisfeito, devolvemos seu dinheiro sem perguntas.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta">
+            <div class="container">
+                <h2 class="section-title fade-in">Não Deixe Seus Concorrentes Saírem na Frente</h2>
+                <p class="section-subtitle fade-in">
+                    A IA está revolucionando os negócios AGORA. Quem não se adaptar, fica para trás.
+                </p>
+                <div class="fade-in">
+                    <a href="#comprar" class="cta-button" onclick="comprarAgora()" style="font-size: 1.2rem; padding: 20px 40px;">
+                        SIM! QUERO DOMINAR A IA HOJE
+                    </a>
+                </div>
+                <p style="margin-top: 2rem; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;" class="fade-in">
+                    Acesso imediato | Compra 100% segura | Garantia de 7 dias
+                </p>
                 <div class="price-section hero-fade-in hero-fade-delay-4" id="comprar">
                     <div class="price-card">
                         <div class="current-price">R$ 47,00</div>
@@ -790,148 +982,22 @@
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="features" id="features">
-            <div class="container">
-                <h2 class="section-title fade-in">O Que Você Vai Descobrir</h2>
-                <p class="section-subtitle fade-in">
-                    Cada capítulo é uma nova ferramenta para revolucionar seu negócio
-                </p>
-                
-                <div class="features-grid">
-                    <div class="feature-card fade-in">
-                        <h3 class="feature-title">Marketing de Conteúdo Automatizado</h3>
-                        <p class="feature-description">
-                            10 prompts para nunca mais ficar sem ideia para suas redes sociais. 
-                            Crie calendários editoriais, roteiros de vídeos e legendas cativantes em minutos.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card fade-in">
-                        <h3 class="feature-title">Copywriting que Vende</h3>
-                        <p class="feature-description">
-                            5 prompts para escrever anúncios, e-mails e páginas de venda que convertem. 
-                            Transforme visitantes em clientes com textos persuasivos.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card fade-in">
-                        <h3 class="feature-title">Estratégia de Negócio</h3>
-                        <p class="feature-description">
-                            4 prompts para gerar ideias de produtos, analisar concorrentes e definir personas. 
-                            Pense como um CEO com IA ao seu lado.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card fade-in">
-                        <h3 class="feature-title">Relacionamento com Clientes</h3>
-                        <p class="feature-description">
-                            11 prompts para criar fãs da sua marca. Desde o atendimento perfeito 
-                            até programas de fidelidade que funcionam.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Guarantee Section -->
-        <section class="guarantee">
-            <div class="container">
-                <div class="guarantee-content fade-in">
-                    <div class="guarantee-icon">✓</div>
-                    <h2 class="section-title">Garantia de Satisfação</h2>
-                    <p class="section-subtitle">
-                        Oferecemos garantia incondicional de 7 dias. Se você não ficar satisfeito com o eBook, 
-                        devolvemos seu dinheiro sem perguntas. Mais de 500 leitores já transformaram seus negócios!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="faq" id="faq">
-            <div class="container">
-                <h2 class="section-title fade-in">Perguntas Frequentes</h2>
-                
-                <div class="faq-item fade-in">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        O e-book funciona para qualquer tipo de negócio?
-                    </div>
-                    <div class="faq-answer">
-                        Sim! Os prompts foram criados para serem adaptáveis a qualquer nicho. 
-                        Seja você um consultor, lojista, prestador de serviços ou infoprodutor, 
-                        você encontrará estratégias aplicáveis ao seu negócio.
-                    </div>
-                </div>
-                
-                <div class="faq-item fade-in">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Preciso ter experiência com IA para usar?
-                    </div>
-                    <div class="faq-answer">
-                        Não! O e-book ensina exatamente como "falar" com o ChatGPT para obter 
-                        os melhores resultados. Incluímos instruções claras e exemplos práticos 
-                        para iniciantes.
-                    </div>
-                </div>
-                
-                <div class="faq-item fade-in">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Como recebo o e-book após a compra?
-                    </div>
-                    <div class="faq-answer">
-                        Após a confirmação do pagamento, você recebe instantaneamente um e-mail 
-                        com o link para download do e-book em PDF. É rápido e automático!
-                    </div>
-                </div>
-                
-                <div class="faq-item fade-in">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Há garantia de reembolso?
-                    </div>
-                    <div class="faq-answer">
-                        Sim! Oferecemos garantia incondicional de 7 dias. Se você não ficar 
-                        100% satisfeito, devolvemos seu dinheiro sem perguntas.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA -->
-        <section class="final-cta">
-            <div class="container">
-                <h2 class="section-title fade-in">Não Deixe Seus Concorrentes Saírem na Frente</h2>
-                <p class="section-subtitle fade-in">
-                    A IA está revolucionando os negócios AGORA. Quem não se adaptar, fica para trás.
-                </p>
-                <div class="fade-in">
-                    <a href="#comprar" class="cta-button" onclick="comprarAgora()" style="font-size: 1.2rem; padding: 20px 40px;">
-                         SIM! QUERO DOMINAR A IA HOJE
-                    </a>
-                </div>
-                <p style="margin-top: 2rem; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;" class="fade-in">
-                     Acesso imediato |  Compra 100% segura |  Garantia de 7 dias
-                </p>
-            </div>
-        </section>
-
-        <!-- Footer -->
         <footer class="footer">
             <div class="container">
-            <p>&copy; 2025 O Canivete Suíço Digital. Todos os direitos reservados - Desenvolvido por 
-            <a style="color: orangered;text-decoration: none;" 
-                href="https://wa.me/5511960573657?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os." 
-                target="_blank">
-                Lucas Cabral
-            </a>
-            </p>
+                <p>&copy; 2025 O Canivete Suíço Digital. Todos os direitos reservados - Desenvolvido por 
+                <a style="color: #00c4ff; text-decoration: none;" 
+                    href="https://wa.me/5511960573657?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os." 
+                    target="_blank">
+                    Lucas Cabral
+                </a>
+                </p>
             </footer>
         </div>
     </div>
+    <button id="backToTop">↑ </button>
 
     <script type="module" src="https://unpkg.com/@splinetool/spline-viewer@latest"></script>
     <script>
-        // Loader functionality
         const loader = document.getElementById('loader');
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -939,7 +1005,6 @@
             }, 500);
         });
 
-        // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -947,9 +1012,7 @@
             navLinks.classList.toggle('active');
         });
 
-        // Fade-in effect para todos os elementos
         const fadeInElements = document.querySelectorAll('.fade-in');
-        
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -967,19 +1030,15 @@
             observer.observe(el);
         });
 
-        // FAQ toggle functionality
         function toggleFaq(element) {
             const faqItem = element.parentElement;
             faqItem.classList.toggle('active');
         }
 
-        // Function to handle purchase action
         function comprarAgora() {
             alert("Obrigado por seu interesse! Você será redirecionado para a página de pagamento.");
-            // Here you would typically redirect to a payment page or handle the purchase logic
         }
 
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -992,6 +1051,22 @@
                 }
             });
         });
+         
+    document.addEventListener("DOMContentLoaded", function() {
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
     </script>
 </body>
 </html>
