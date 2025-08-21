@@ -42,7 +42,15 @@
     opacity: 1;
     pointer-events: auto;
   }
-
+    html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.4) 50%, rgba(10, 10, 10, 0.3) 100%);
+        /* Evita topo branco em iOS/Android */
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -95,10 +103,9 @@
             position: fixed;
             width: 100%;
             top: 0;
-            background: rgba(10, 10, 10, 0.9);
+            background: transparent;
             backdrop-filter: blur(20px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-content {
